@@ -1,5 +1,6 @@
-// Gets Computer choice - by having rnadom number from 0 - 99 if if 0-32 = rock 33-66 = scissors 
+// Gets Computer choice - by having random number from 0 - 99. If 0-32 = rock, 33-66 = scissors, 
 // 67-99 = paper  
+
 function getComputerChoice() {
    a = Math.random() * 100 
      if (a >= 0 && a <= 32) {
@@ -13,17 +14,21 @@ function getComputerChoice() {
 }
 
 // Ask the human for their choice
+
 function getHumanChoice() {
      return prompt("We're playing Rock Paper Scissors: 3, 2, 1 GO!!") 
         
 }
 
 // intializes two new variables for scores 
+
 let humanScore = 0
 let computerScore = 0
 
-// this function initiates the game which has 5 rounds in 
+// this declares the function which has 5 rounds in 
+
 function playGame() {
+
 // sets scores to 0 in the function
 
     humanScore = 0 
