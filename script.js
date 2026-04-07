@@ -1,3 +1,4 @@
+/*
 // Gets Computer choice - by having random number from 0 - 99. If 0-32 = rock, 33-66 = scissors, 
 // 67-99 = paper  
 
@@ -36,7 +37,7 @@ function playGame() {
 
 // this is the function that gets called to play each specific round of RPS
 
-    function playRound(humanChoice, computerChoice) {
+//   function playRound(humanChoice, computerChoice) {
 
 // Sets humanchoice to lowercase so there choice is caps insensitive  
 
@@ -81,10 +82,10 @@ function playGame() {
 
 // The for loop to run 5 rounds of RPS
 
-    for (let i = 0; i < 5; i++) {
-       console.log(playRound(getHumanChoice(), getComputerChoice()))
+// for (let i = 0; i < 5; i++) {
+//   console.log(playRound(getHumanChoice(), getComputerChoice()))
        
-}  
+// }  
 
 // To output the scoreboard after the 5 rounds 
 
@@ -100,8 +101,93 @@ function playGame() {
     } else if (humanScore == computerScore){
         console.log("It's a draw, Good Game")
     }
-}
+
 
 // Calls the function 
 
-playGame()
+playGame() */
+
+
+//////////////////////////////////
+
+
+const roundResult = document.getElementById("roundResult");
+const humanScr = document.getElementById("humanScr");
+const computerScr = document.getElementById("computerScr"); 
+
+let humanScore = 0
+let computerScore = 0
+
+ function playRound(humanChoice, computerChoice) {
+
+
+
+    humanChoice = humanChoice.toLowerCase()
+
+    if (humanChoice == "rock" && computerChoice == "Rock") {
+        roundResult.textContent = "Draw, both chose Rock" 
+     } else if (humanChoice == "rock" && computerChoice == "Scissors") {
+        humanScore += 1
+        roundResult.textContent = "You Win! Rock beats Scissors"
+     } else if (humanChoice == "rock" && computerChoice == "Paper") {
+        computerScore += 1
+        roundResult.textContent = "Computer Wins :( Paper Beats Rock"
+     } else if (humanChoice == "paper" && computerChoice == "Rock") {
+        humanScore += 1
+        roundResult.textContent = "You Win! Paper beats Rock"
+     } else if (humanChoice == "paper" && computerChoice == "Paper") {
+        roundResult.textContent = "Draw both chose Paper"
+     } else if (humanChoice == "paper" && computerChoice == "Scissors") {
+        computerScore += 1
+        roundResult.textContent = "Computer Wins :( Scissors beats Paper"
+     }  else if (humanChoice == "scissors" && computerChoice == "Rock") {
+        computerScore += 1
+        roundResult.textContent = "Computer Wins :( Rock beats Scissors"
+     } else if (humanChoice == "scissors" && computerChoice == "Scissors") {
+        roundResult.textContent = "Draw, both chose Scissors"
+     } else if(humanChoice == "scissors" && computerChoice == "Paper") {
+        humanScore += 1
+        roundResult.textContent = "You Win! Scissors beats Paper"
+     } else {
+        roundResult.textContent = "Invalid game, you must chose either Rock, Paper or Scissor"
+     }  
+
+      humanScr.textContent = "Human Score: " + humanScore
+      computerScr.textContent = "Computer Score: " + computerScore
+    }
+
+
+
+
+const rockBtn = document.getElementById("rockBtn");
+const paperBtn = document.getElementById("paperBtn");
+const scissorBtn = document.getElementById("scissorBtn");
+
+rockBtn.addEventListener("click", function() {
+   playRound("Rock", getComputerChoice())
+});
+
+
+
+paperBtn.addEventListener("click", function() {
+   playRound("Paper", getComputerChoice())
+});
+
+
+
+scissorBtn.addEventListener("click", function() {
+   playRound("Scissors", getComputerChoice())
+}); 
+
+
+function getComputerChoice() {
+   a = Math.random() * 100 
+     if (a >= 0 && a <= 32) {
+        return "Rock"
+     } else if (a >= 33 && a <= 66) {
+        return "Scissors"
+     } else if (a >= 67) {
+        return "Paper"
+     }
+  
+}
