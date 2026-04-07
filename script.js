@@ -114,74 +114,16 @@ playGame() */
 const roundResult = document.getElementById("roundResult");
 const humanScr = document.getElementById("humanScr");
 const computerScr = document.getElementById("computerScr"); 
-
-let humanScore = 0
-let computerScore = 0
-
- function playRound(humanChoice, computerChoice) {
-
-
-
-    humanChoice = humanChoice.toLowerCase()
-
-    if (humanChoice == "rock" && computerChoice == "Rock") {
-        roundResult.textContent = "Draw, both chose Rock" 
-     } else if (humanChoice == "rock" && computerChoice == "Scissors") {
-        humanScore += 1
-        roundResult.textContent = "You Win! Rock beats Scissors"
-     } else if (humanChoice == "rock" && computerChoice == "Paper") {
-        computerScore += 1
-        roundResult.textContent = "Computer Wins :( Paper Beats Rock"
-     } else if (humanChoice == "paper" && computerChoice == "Rock") {
-        humanScore += 1
-        roundResult.textContent = "You Win! Paper beats Rock"
-     } else if (humanChoice == "paper" && computerChoice == "Paper") {
-        roundResult.textContent = "Draw both chose Paper"
-     } else if (humanChoice == "paper" && computerChoice == "Scissors") {
-        computerScore += 1
-        roundResult.textContent = "Computer Wins :( Scissors beats Paper"
-     }  else if (humanChoice == "scissors" && computerChoice == "Rock") {
-        computerScore += 1
-        roundResult.textContent = "Computer Wins :( Rock beats Scissors"
-     } else if (humanChoice == "scissors" && computerChoice == "Scissors") {
-        roundResult.textContent = "Draw, both chose Scissors"
-     } else if(humanChoice == "scissors" && computerChoice == "Paper") {
-        humanScore += 1
-        roundResult.textContent = "You Win! Scissors beats Paper"
-     } else {
-        roundResult.textContent = "Invalid game, you must chose either Rock, Paper or Scissor"
-     }  
-
-      humanScr.textContent = "Human Score: " + humanScore
-      computerScr.textContent = "Computer Score: " + computerScore
-    }
-
-
-
-
+const winner = document.getElementById("winner");
+const resetBtn = document.getElementById("resetBtn");
 const rockBtn = document.getElementById("rockBtn");
 const paperBtn = document.getElementById("paperBtn");
 const scissorBtn = document.getElementById("scissorBtn");
-
-rockBtn.addEventListener("click", function() {
-   playRound("Rock", getComputerChoice())
-});
-
-
-
-paperBtn.addEventListener("click", function() {
-   playRound("Paper", getComputerChoice())
-});
-
-
-
-scissorBtn.addEventListener("click", function() {
-   playRound("Scissors", getComputerChoice())
-}); 
-
+let humanScore = 0
+let computerScore = 0
 
 function getComputerChoice() {
-   a = Math.random() * 100 
+  const a = Math.random() * 100 
      if (a >= 0 && a <= 32) {
         return "Rock"
      } else if (a >= 33 && a <= 66) {
@@ -191,3 +133,76 @@ function getComputerChoice() {
      }
   
 }
+
+function playRound(humanChoice, computerChoice) {
+
+
+
+    humanChoice = humanChoice.toLowerCase()
+
+    if (humanChoice == "rock" && computerChoice == "Rock") {
+        roundResult.textContent = "Round result: Draw, both chose Rock" 
+     } else if (humanChoice == "rock" && computerChoice == "Scissors") {
+        humanScore += 1
+        roundResult.textContent = "Round result: You Win! Rock beats Scissors"
+     } else if (humanChoice == "rock" && computerChoice == "Paper") {
+        computerScore += 1
+        roundResult.textContent = "Round result: Computer Wins :( Paper Beats Rock"
+     } else if (humanChoice == "paper" && computerChoice == "Rock") {
+        humanScore += 1
+        roundResult.textContent = "Round result: You Win! Paper beats Rock"
+     } else if (humanChoice == "paper" && computerChoice == "Paper") {
+        roundResult.textContent = "Round result: Draw both chose Paper"
+     } else if (humanChoice == "paper" && computerChoice == "Scissors") {
+        computerScore += 1
+        roundResult.textContent = "Round result: Computer Wins :( Scissors beats Paper"
+     }  else if (humanChoice == "scissors" && computerChoice == "Rock") {
+        computerScore += 1
+        roundResult.textContent = "Round result: Computer Wins :( Rock beats Scissors"
+     } else if (humanChoice == "scissors" && computerChoice == "Scissors") {
+        roundResult.textContent = "Round result: Draw, both chose Scissors"
+     } else if(humanChoice == "scissors" && computerChoice == "Paper") {
+        humanScore += 1
+        roundResult.textContent = "Round result: You Win! Scissors beats Paper"
+     } else {
+        roundResult.textContent = "Round result: Invalid game, you must chose either Rock, Paper or Scissor"
+     }  
+
+      humanScr.textContent = "Human Score: " + humanScore
+      computerScr.textContent = "Computer Score: " + computerScore
+
+      if(humanScore === 5) {
+         winner.textContent = "Winnner: Human Wins!!!"
+         resetBtn.style.display = "block"
+      } else if (computerScore === 5) {
+         winner.textContent = "Winner: Computer Wins :(("
+         resetBtn.style.display = "block"
+      } else {
+         winner.textContent = "Winner: Carry on playing!"
+      }
+      
+    }
+
+
+
+rockBtn.addEventListener("click", function() {
+   playRound("Rock", getComputerChoice())
+});
+
+paperBtn.addEventListener("click", function() {
+   playRound("Paper", getComputerChoice())
+});
+
+scissorBtn.addEventListener("click", function() {
+   playRound("Scissors", getComputerChoice())
+});
+
+resetBtn.addEventListener("click", function() { 
+   humanScore = 0; 
+   computerScore = 0; 
+   humanScr.textContent = "Human Score: " + humanScore; 
+   computerScr.textContent = "Computer Score: " + computerScore; 
+   resetBtn.style.display = "none";
+   roundResult.textContent = "Round Result: "
+   winner.textContent = "Winner: ";
+}) 
